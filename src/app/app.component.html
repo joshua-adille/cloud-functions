@@ -1,2 +1,8 @@
 <router-outlet></router-outlet>
 <h1>Hello World</h1>
+<br /><br />
+<ul>
+  <li *ngFor="let item of item$ | async">
+    {{ item.description }}
+  </li>
+</ul>
