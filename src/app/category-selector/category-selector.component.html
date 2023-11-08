@@ -1,0 +1,11 @@
+<select
+  #choice
+  name="category"
+  id="category"
+  (change)="pushCategoryData(choice.options[+choice.value].text, note.id)"
+>
+  <option [value]="" disabled selected>Select Category</option>
+  <option *ngFor="let item of category" [value]="item.id">
+    {{ item.type }}
+  </option>
+</select>
