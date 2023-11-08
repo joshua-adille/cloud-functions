@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { TaskEditComponent } from '../task-edit/task-edit.component';
 import { DeleteButtonComponent } from '../delete-button/delete-button.component';
 import { CategorySelectorComponent } from '../category-selector/category-selector.component';
+import { ArchiveButtonComponent } from '../archive-button/archive-button.component';
 
 @Component({
   selector: 'app-notes',
@@ -15,6 +16,7 @@ import { CategorySelectorComponent } from '../category-selector/category-selecto
     TaskEditComponent,
     DeleteButtonComponent,
     CategorySelectorComponent,
+    ArchiveButtonComponent,
   ],
   templateUrl: './notes.component.html',
   styleUrls: ['./notes.component.scss'],
