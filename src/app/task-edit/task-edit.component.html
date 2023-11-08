@@ -1,0 +1,9 @@
+<input
+  type="text"
+  class="todo-input"
+  placeholder="Enter here to edit task"
+  #noteUpdate
+/>
+<button class="update-button" (click)="pushData(noteUpdate.value, note.id)">
+  Update Note
+</button>
