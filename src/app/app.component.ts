@@ -51,4 +51,55 @@ export class AppComponent {
         console.log(`There was an error! ${error}`);
       });
   }
+
+  deleteNotes(id: string) {
+    this.service
+      .deleteNote(id)
+      .then((res) => {
+        console.log(res);
+        this.getData();
+      })
+      .catch((error) => {
+        console.log(`There was an error! ${error}`);
+      });
+  }
+
+  updateNotes(editNotes: string, id: string) {
+    // debugger;
+    this.service
+      .updateNote(editNotes, id)
+      .then((res) => {
+        console.log(res);
+        this.getData();
+      })
+      .catch((error) => {
+        console.log(`There was an error! ${error}`);
+      });
+  }
+
+  updateCategories(choice: string, id: string) {
+    // debugger;
+    // console.log('Clicked!', choice, id);
+    this.service
+      .updateCategory(choice, id)
+      .then((res) => {
+        console.log(res);
+        this.getData();
+      })
+      .catch((error) => {
+        console.log(`There was an error! ${error}`);
+      });
+  }
+
+  markDone(status: boolean, id: string) {
+    this.service
+      .markDone(status, id)
+      .then((res) => {
+        console.log(res);
+        this.getData();
+      })
+      .catch((error) => {
+        console.log(`There was an error! ${error}`);
+      });
+  }
 }
