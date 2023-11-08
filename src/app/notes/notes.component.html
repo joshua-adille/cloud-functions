@@ -10,3 +10,8 @@
   (buttonData)="pushUpdateData($event)"
 ></app-task-edit
 ><br />
+
+<app-delete-button
+  [note]="note"
+  (deleteData)="pushDeleteData($event)"
+></app-delete-button>
