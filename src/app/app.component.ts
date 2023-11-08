@@ -6,11 +6,12 @@ import { Observable, switchMap, map } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 
 import { SharedService } from './shared.service';
+import { NotesComponent } from './notes/notes.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, FormsModule],
+  imports: [CommonModule, RouterOutlet, FormsModule, NotesComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })

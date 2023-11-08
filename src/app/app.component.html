@@ -4,3 +4,18 @@
 
 <input type="text" class="todo-input" placeholder="Enter task" #newNote />
 <button class="add-button" (click)="addNotes(newNote.value)">Add Note</button>
+
+<br /><br />
+
+<app-notes
+  [category]="category"
+  [notes]="notes"
+  *ngFor="let note of notes; let i = index"
+  [i]="i"
+  [note]="note"
+  (updateData)="updateNotes($event.value, $event.id)"
+  (deleteData)="deleteNotes($event)"
+  (categoryData)="updateCategories($event.data, $event.id)"
+  (checkboxData)="markDone($event.data, $event.id)"
+>
+</app-notes>
