@@ -1,8 +1,6 @@
 <router-outlet></router-outlet>
-<h1>Hello World</h1>
-<br /><br />
-<ul>
-  <li *ngFor="let item of item$ | async">
-    {{ item.description }}
-  </li>
-</ul>
+<h1>Todo App</h1>
+<br />
+
+<input type="text" class="todo-input" placeholder="Enter task" #newNote />
+<button class="add-button" (click)="addNotes(newNote.value)">Add Note</button>
