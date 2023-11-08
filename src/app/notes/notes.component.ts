@@ -2,11 +2,12 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Note } from '../note';
 import { FormsModule } from '@angular/forms';
+import { TaskEditComponent } from '../task-edit/task-edit.component';
 
 @Component({
   selector: 'app-notes',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, TaskEditComponent],
   templateUrl: './notes.component.html',
   styleUrls: ['./notes.component.scss'],
 })
