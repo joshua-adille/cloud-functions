@@ -11,17 +11,11 @@ import { onRequest } from 'firebase-functions/v2/https';
 import * as logger from 'firebase-functions/logger';
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
-import { initializeApp } from 'firebase-admin/app';
+// import { Firestore } from 'firebase-admin/firestore';
 
 // Start writing functions
 // https://firebase.google.com/docs/functions/typescript
-initializeApp({
-  // credential: admin.credential.applicationDefault(),
-  projectId: 'test-projects-aabaa', // Replace with your emulator project ID
-  databaseURL: '127.0.0.1:8080', // Use the Firestore emulator's host and port
-});
-
-// admin.initializeApp({
+// initializeApp({
 // credential: admin.credential.applicationDefault(),
 // projectId: 'test-projects-aabaa', // Replace with your emulator project ID
 // databaseURL: '127.0.0.1:8080', // Use the Firestore emulator's host and port
@@ -59,12 +53,6 @@ export const moveNoteToArchive = functions.firestore
         .collection('archive')
         .doc(noteRef.id);
 
-      // return noteRef.get().then((snapshot) => {
-      //     const data = snapshot.data();
-      //     return archiveRef.set(data).then(() => {
-      //         return noteRef.delete();
-      //     });
-      // });
       try {
         const snapshot = await noteRef.get();
         const data = snapshot.data();
@@ -76,9 +64,33 @@ export const moveNoteToArchive = functions.firestore
       } catch (error) {
         console.error('Error moving note to archive:', error);
       }
-    }
+      // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      // try {
+      //   // Check Firestore emulator
+      //   const firestoreEmulatorHost = process.env.FIRESTORE_EMULATOR_HOST;
+      //   const firestoreOptions = firestoreEmulatorHost
+      //     ? { host: firestoreEmulatorHost, ssl: false }
+      //     : undefined;
 
-    // else {
-    //     return null;
-    // }
+      //   // const firestoreEmulator = new Firestore(firestoreOptions);
+      //   const firestoreEmulator = new Firestore(firestoreOptions);
+
+      //   // Retrieve document from Firestore emulator
+      //   const snapshot = await firestoreEmulator
+      //     .collection('notes')
+      //     .doc(noteRef.id)
+      //     .get();
+      //   const data = snapshot.data();
+
+      //   if (data) {
+      //     // Move document to archive collection
+      //     await archiveRef.set(data);
+
+      //     // Delete document from original collection
+      //     await noteRef.delete();
+      //   }
+      // } catch (error) {
+      //   console.error('Error moving note to archive:', error);
+      // }
+    }
   });

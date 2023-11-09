@@ -16,6 +16,7 @@ import {
   getFunctions,
   provideFunctions,
   connectFunctionsEmulator,
+  Functions,
 } from '@angular/fire/functions';
 
 export const appConfig: ApplicationConfig = {
@@ -25,18 +26,14 @@ export const appConfig: ApplicationConfig = {
       provideFirebaseApp(() => initializeApp(firebaseConfig)),
       // provideFirestore(() => getFirestore()),
       provideFirestore(() => {
-        let firestore: Firestore;
-        firestore = initializeFirestore(getApp(), {
-          experimentalForceLongPolling: true,
-        });
+        const firestore: Firestore = initializeFirestore(getApp(), {});
         connectFirestoreEmulator(firestore, '127.0.0.1', 8080);
         return firestore;
       }),
-      provideFunctions(() => getFunctions()),
+      // provideFunctions(() => getFunctions()),
       provideFunctions(() => {
-        let functions = getFunctions(getApp());
+        const functions: Functions = getFunctions(getApp());
         connectFunctionsEmulator(functions, '127.0.0.1', 5001);
-
         return functions;
       }),
     ]),
