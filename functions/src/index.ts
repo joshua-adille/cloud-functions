@@ -11,9 +11,21 @@ import { onRequest } from 'firebase-functions/v2/https';
 import * as logger from 'firebase-functions/logger';
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
+import { initializeApp } from 'firebase-admin/app';
 
 // Start writing functions
 // https://firebase.google.com/docs/functions/typescript
+initializeApp({
+  // credential: admin.credential.applicationDefault(),
+  projectId: 'test-projects-aabaa', // Replace with your emulator project ID
+  databaseURL: '127.0.0.1:8080', // Use the Firestore emulator's host and port
+});
+
+// admin.initializeApp({
+// credential: admin.credential.applicationDefault(),
+// projectId: 'test-projects-aabaa', // Replace with your emulator project ID
+// databaseURL: '127.0.0.1:8080', // Use the Firestore emulator's host and port
+// });
 
 export const helloWorld = onRequest((request, response) => {
   logger.info('Hello logs!', { structuredData: true });
