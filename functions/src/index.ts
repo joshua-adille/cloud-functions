@@ -20,6 +20,38 @@ admin.initializeApp({
   databaseURL: '127.0.0.1:8080', // Use the Firestore emulator's host and port
 });
 
+export const moveNoteToArchive = functions.firestore
+  .document('notes/{noteId}')
+  .onUpdate(async (change, context) => {
+    const newValue = change.after.data();
+    const previousValue = change.before.data();
+
+    if (
+      newValue &&
+      newValue.moveToArchive &&
+      previousValue &&
+      !previousValue.moveToArchive
+    ) {
+      const noteRef = change.after.ref;
+      const archiveRef = admin
+        .firestore()
+        .collection('archive')
+        .doc(noteRef.id);
+
+      try {
+        const snapshot = await noteRef.get();
+        const data = snapshot.data();
+
+        if (data) {
+          await archiveRef.set(data);
+          await noteRef.delete();
+        }
+      } catch (error) {
+        console.error('Error moving note to archive:', error);
+      }
+    }
+  });
+
 // export const helloWorld = onRequest((request, response) => {
 //   logger.info('Hello logs!', { structuredData: true });
 //   console.log('Request Body: ', request.body);
