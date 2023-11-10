@@ -16,6 +16,7 @@ import { NotesComponent } from './notes/notes.component';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
+  newNote: string = '';
   constructor(private service: SharedService) {}
   notes: any = [];
   category: any = [];
@@ -41,9 +42,9 @@ export class AppComponent {
   ngOnInit() {
     this.getData();
   }
-  addNotes(newNotes: string) {
+  addNotes() {
     this.service
-      .addNote(newNotes)
+      .addNote(this.newNote)
       .then((res) => {
         console.log(res);
         this.getData();

@@ -1,5 +1,6 @@
 import { ApplicationConfig, importProvidersFrom } from '@angular/core';
 import { provideRouter } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 import { routes } from './app.routes';
 
@@ -18,24 +19,29 @@ import {
   connectFunctionsEmulator,
   Functions,
 } from '@angular/fire/functions';
+import { FormsModule } from '@angular/forms';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     importProvidersFrom([
       provideFirebaseApp(() => initializeApp(firebaseConfig)),
-      // provideFirestore(() => getFirestore()),
-      provideFirestore(() => {
-        const firestore: Firestore = initializeFirestore(getApp(), {});
-        connectFirestoreEmulator(firestore, '127.0.0.1', 8080);
-        return firestore;
-      }),
-      // provideFunctions(() => getFunctions()),
-      provideFunctions(() => {
-        const functions: Functions = getFunctions(getApp());
-        connectFunctionsEmulator(functions, '127.0.0.1', 5001);
-        return functions;
-      }),
+      provideFirestore(() => getFirestore()),
+      provideFunctions(() => getFunctions()),
+      // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      // For local firestore emulator use the Imports below
+      // provideFirestore(() => {
+      //   const firestore: Firestore = initializeFirestore(getApp(), {});
+      //   connectFirestoreEmulator(firestore, '127.0.0.1', 8080);
+      //   return firestore;
+      // }),
+      // provideFunctions(() => {
+      //   const functions: Functions = getFunctions(getApp());
+      //   connectFunctionsEmulator(functions, '127.0.0.1', 5001);
+      //   return functions;
+      // }),
+      HttpClientModule,
+      FormsModule,
     ]),
   ],
 };

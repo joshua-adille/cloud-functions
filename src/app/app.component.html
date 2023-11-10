@@ -2,8 +2,13 @@
 <h1>Todo App</h1>
 <br />
 
-<input type="text" class="todo-input" placeholder="Enter task" #newNote />
-<button class="add-button" (click)="addNotes(newNote.value)">Add Note</button>
+<input
+  type="text"
+  class="todo-input"
+  placeholder="Enter task"
+  [(ngModel)]="newNote"
+/>
+<button class="add-button" (click)="addNotes()">Add Note</button>
 
 <br /><br />
 
