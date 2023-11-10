@@ -10,23 +10,25 @@
 // import { onRequest } from 'firebase-functions/v2/https';
 // import * as logger from 'firebase-functions/logger';
 import * as functions from 'firebase-functions';
+import * as cors from 'cors';
 // import * as admin from 'firebase-admin';
 // import { Firestore } from 'firebase-admin/firestore';
 
 // Start writing functions
 // https://firebase.google.com/docs/functions/typescript
+const corsHandler = cors({ origin: true });
 
 export const textToLength = functions.https.onRequest((request, response) => {
-  try {
-    const text = request.body.data.text as string | undefined;
-    const textLength = text?.length;
+  corsHandler(request, response, () => {
+    try {
+      const text = request.body.text as string | undefined;
+      const textLength = text?.length;
 
-    console.log(`Text length: ${textLength}`);
-    console.log('Request Body: ', request.body);
-    response.send(`Text length: ${textLength}`);
-  } catch (error) {
-    response.send(`Error: ${error}`);
-  }
+      response.status(200).send(`${textLength}`);
+    } catch (error) {
+      response.status(500).send(`Error: ${error}`);
+    }
+  });
 });
 
 // export const textToLength = onRequest((request, response) => {

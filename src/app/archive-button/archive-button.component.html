@@ -1,1 +1,7 @@
-<button class="button">Add to Archive</button>
+<button class="button" (click)="getTextLength()">Check Length</button>
+<p class="textLength">
+  <span *ngIf="result$; else noText">Task text length: {{ result$ }}</span>
+</p>
+<ng-template #noText></ng-template>
+
+<!-- {{ result$ | async }} -->
