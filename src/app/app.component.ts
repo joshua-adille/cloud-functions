@@ -1,8 +1,11 @@
-import { Component, inject } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import { Firestore, collectionData, collection } from '@angular/fire/firestore';
-import { Observable, switchMap, map } from 'rxjs';
+import { switchMap, map } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 
 import { SharedService } from './shared.service';
@@ -14,10 +17,11 @@ import { NotesComponent } from './notes/notes.component';
   imports: [CommonModule, RouterOutlet, FormsModule, NotesComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
   newNote: string = '';
-  constructor(private service: SharedService) {}
+  constructor(private service: SharedService, private cdr: ChangeDetectorRef) {}
   notes: any = [];
   category: any = [];
 
@@ -37,6 +41,7 @@ export class AppComponent {
       .subscribe((res) => {
         this.notes = res.notes;
         this.category = res.categories;
+        this.cdr.markForCheck();
       });
   }
   ngOnInit() {
