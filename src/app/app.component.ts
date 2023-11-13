@@ -57,6 +57,7 @@ export class AppComponent {
       .catch((error) => {
         console.log(`There was an error! ${error}`);
       });
+    this.newNote = '';
   }
 
   deleteNotes(id: string) {
